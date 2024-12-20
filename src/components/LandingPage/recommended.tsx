@@ -6,7 +6,6 @@ import carImage2 from "../../../public/cards/carImage2.png"
 import carImage3 from "../../../public/cards/carImage3.png"
 import carImage4 from "../../../public/cards/carImage4.png"
 import Titlebar from './titlebar';
-import ButtonComponent from '../button';
 import Link from "next/link";
 
 

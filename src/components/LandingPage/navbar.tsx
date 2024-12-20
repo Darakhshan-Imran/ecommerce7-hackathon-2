@@ -1,7 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { Search } from 'lucide-react'
-import {iconsList} from "../constants"
+import {iconsList} from "../../constants"
 
 const Navbar = () => {
   return (

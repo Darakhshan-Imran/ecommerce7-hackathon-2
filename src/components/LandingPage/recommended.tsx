@@ -1,11 +1,13 @@
 import React from 'react'
 import Image from "next/image";
-import carImage1 from "../../public/cards/carImage1.png"
-import carImage2 from "../../public/cards/carImage2.png"
-import carImage3 from "../../public/cards/carImage3.png"
-import carImage4 from "../../public/cards/carImage4.png"
+import {Heart} from "lucide-react";
+import carImage1 from "../../../public/cards/carImage1.png"
+import carImage2 from "../../../public/cards/carImage2.png"
+import carImage3 from "../../../public/cards/carImage3.png"
+import carImage4 from "../../../public/cards/carImage4.png"
 import Titlebar from './titlebar';
-import ButtonComponent from './button';
+import ButtonComponent from '../button';
+import Link from "next/link";
 
 
 const carData = [
@@ -111,9 +113,12 @@ const carData = [
           {carData.map((car) => (
             <div
               key={car.id}
-              className="border rounded-lg shadow-md p-4 hover:shadow-lg transition w-[304px] h-[388px] bg-slate-100"
+              className="rounded-xl shadow-md p-4 hover:shadow-lg transition- w-[304px] h-[388px] bg-white"
             >
-              <h3 className="text-lg font-semibold">{car.name}</h3>
+              <div className='flex justify-between'>
+                <h3 className="text-lg font-semibold">{car.name}</h3>
+                <Heart/>
+              </div>
               <p className="text-sm text-gray-500">{car.type}</p>
               <Image
                 src={car.image}
@@ -139,16 +144,22 @@ const carData = [
               <div className="flex justify-between items-center mt-12">
                 <p className="text-lg font-bold">{car.price}</p>
                 <button className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600">
-                  Rent Now
+                 <Link href="/product">Rent Now</Link> 
                 </button>
               </div>
             </div>
           ))}
         </div>
-        <div className='flex justify-center items-center'>
-        <ButtonComponent className="px-6 py-2 bg-blue-500 text-white rounded-[3px] hover:bg-blue-600 transition-colors mt-16 mb-9">
-                Show More Cars
-        </ButtonComponent>
+        <div className='flex gap-5 justify-center items-center'>
+        <button className="px-6 py-2 bg-blue-500 text-white rounded-[3px] hover:bg-blue-600 transition-colors mt-16 mb-9">
+            <Link href="/car_detail">Show Details</Link> 
+        </button>
+        <button className="px-6 py-2 bg-blue-500 text-white rounded-[3px] hover:bg-blue-600 transition-colors mt-16 mb-9">
+            <Link href="/rental_form">Booking Details</Link> 
+        </button>
+        <button className="px-6 py-2 bg-blue-500 text-white rounded-[3px] hover:bg-blue-600 transition-colors mt-16 mb-9">
+            <Link href="/car_rental">Check Out</Link> 
+        </button>
         </div>
       </div>
     );

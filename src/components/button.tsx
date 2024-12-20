@@ -2,6 +2,7 @@
 import { Button } from "./ui/button"
 import { ReactNode } from "react"
 
+
 interface ButtonComponentProps {
   children: ReactNode;
   className?: string;
@@ -10,7 +11,7 @@ interface ButtonComponentProps {
 const ButtonComponent = ({ children, className }: ButtonComponentProps) => {
   return (
     <Button className={className}>
-      {children}
+     {children}
     </Button>
   )
 }

@@ -1,11 +1,28 @@
-import React from "react";
-import Image from "next/image";
+"use client"
+
+import React, { useState } from "react";
+import Image, { StaticImageData } from "next/image";
 import { Heart } from "lucide-react";
 import carImage1 from "../../public/cards/carImage1.png";
 import carImage2 from "../../public/cards/carImage2.png";
 import carImage3 from "../../public/cards/carImage3.png";
 import carImage4 from "../../public/cards/carImage4.png";
+import gasstation from "../../public/card_icons/gasstation.png";
+import mannual from "../../public/card_icons/mannual.png";
+import persons from "../../public/card_icons/persons.png";
 import Link from "next/link";
+
+interface CarAttributes{
+  key: string;
+  label: string;
+  icon: StaticImageData;
+}
+const carAttributesData:CarAttributes[] = [
+  { key: "fuelCapacity", label: "Fuel", icon: gasstation },
+  { key: "transmission", label: "Transmission", icon: mannual },
+  { key: "passengers", label: "Passengers", icon: persons },
+];
+
 
 const carData = [
   {
@@ -24,11 +41,11 @@ const carData = [
     name: "Nissan GT-R",
     type: "Sport",
     image: carImage2,
-    fuelCapacity: "90L",
+    fuelCapacity: "80L",
     transmission: "Manual",
     passengers: "2 People",
     price: "$80.00/day",
-    originalPrice: "$90.00/day",
+    originalPrice: "$100.00/day",
   },
   {
     id: 3,
@@ -55,43 +72,67 @@ const carData = [
 ];
 
 const CarGrid = () => {
+  const [likedCars, setLikedCars] = useState<number[]>([]); // State to track liked cars
+
+  const toggleLike = (id: number) => {
+    setLikedCars((prev) =>
+      prev.includes(id) ? prev.filter((carId) => carId !== id) : [...prev, id]
+    );
+  };
+
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-1 md:gap-2 lg:gap-3 gap-4 mt-7 wrapper">
+    <div className="wrapper mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {carData.map((car) => (
           <div
             key={car.id}
-            className="rounded-xl shadow-md p-4 hover:shadow-lg transition- w-[304px] h-[388px] bg-white"
+            className="rounded-lg shadow-md p-4 hover:shadow-lg transition bg-white"
           >
-            <div className="flex justify-between">
+            {/* Header */}
+            <div className="flex justify-between items-center">
               <h3 className="text-lg font-semibold">{car.name}</h3>
-              <Heart />
+              <Heart
+                className={`cursor-pointer transition ${
+                  likedCars.includes(car.id) ? "fill-red-500 text-red-500" : "text-gray-500"
+                } hover:fill-red-500 hover:text-red-500`}
+                onClick={() => toggleLike(car.id)}
+              />
             </div>
-            <p className="text-sm text-gray-500">{car.type}</p>
+            <p className="text-sm text-gray-500 mb-3">{car.type}</p>
 
+            {/* Car Image */}
             <Image
-              src={car.image} // Place images in the public/images folder
+              src={car.image}
               alt={car.name}
               width={232}
-              height={70}
-              className="w-full object-cover rounded-md mb-4 mt-10"
+              height={160}
+              className="w-full h-[160px] object-contain rounded-md"
             />
 
-            <div className="mt-8 flex gap-2">
-              <p className="text-sm">
-                <span className="font-semibold">Fuel:</span> {car.fuelCapacity}
-              </p>
-              <p className="text-sm">
-                <span className="font-semibold">Transmission:</span>{" "}
-                {car.transmission}
-              </p>
-              <p className="text-sm">
-                <span className="font-semibold"></span> {car.passengers}
-              </p>
+            {/* Car Details */}
+            
+            <div className="flex justify-between items-center mt-4 text-sm text-gray-700">
+              {carAttributesData.map((attr) => (
+                <div key={attr.key} className="flex items-center space-x-1">
+                  <Image
+                    src={attr.icon}
+                    alt={`${attr.label} icon`}
+                    width={16}
+                    height={16}
+                    className="w-4 h-4"
+                  />
+                  <span>{attr.label}</span>
+                </div>
+              ))}
             </div>
-            <div className="flex justify-between items-center mt-12">
-              <p className="text-lg font-bold">{car.price}</p>
-              <button className="bg-blue-500 text-white py-1 px-4 rounded hover:bg-blue-600">
+
+            {/* Pricing and Button */}
+            <div className="flex justify-between items-center mt-6">
+              <div>
+                <p className="text-lg font-bold">{car.price}</p>
+                <p className="text-sm text-gray-400 line-through">{car.originalPrice}</p>
+              </div>
+              <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
                 <Link href="/product">Rent Now</Link>
               </button>
             </div>
@@ -101,4 +142,6 @@ const CarGrid = () => {
     </div>
   );
 };
+
 export default CarGrid;
+

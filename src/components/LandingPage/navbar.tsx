@@ -2,6 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import { Search } from 'lucide-react'
 import {iconsList} from "../../constants"
+import filter from "../../../public/filter.jpg";
 
 const Navbar = () => {
   return (
@@ -24,7 +25,7 @@ const Navbar = () => {
             aria-label="Filter"
           >
             <Image 
-              src="/filter.jpg" 
+              src={filter}
               alt="Filter" 
               width={20} 
               height={20}

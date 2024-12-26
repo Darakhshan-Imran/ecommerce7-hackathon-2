@@ -3,14 +3,13 @@
 import React, { useState } from "react";
 import { VehicleFilterSidebar } from "../../components/sidebar";
 import { Heart } from 'lucide-react';
-import ButtonComponent from "@/components/button";
 import RatingStar from "../../components/ratingstar";
 import Image from "next/image";
 import CarGrid from "@/components/cards";
 import RecomendedCars from "@/components/LandingPage/recommended";
 import Titlebar from "@/components/LandingPage/titlebar";
-import profileimage1 from "../../../public/profileimage1.png";
-import profileimage2 from "../../../public/profileimage2.png";
+import profileimage1 from "../../../public/nav_icons/profileimage1.png";
+import profileimage2 from "../../../public/nav_icons/profileimage2.png";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import Ads1 from "../../../public/Ads1.png";
 import car1 from "../../../public/car1.png";
@@ -197,9 +196,9 @@ const Detail = () => {
               </p>
               <del className="text-[#90A3BF] text-sm font-medium">$100.00</del>
               </div>
-              <ButtonComponent className="w-full sm:w-auto px-6 py-2 bg-blue-500 text-white text-base rounded-lg hover:bg-blue-600 transition-colors">
-               <Link href="/carrental">Rent Now</Link> 
-              </ButtonComponent>
+              <button className="w-full sm:w-auto px-6 py-2 bg-blue-500 text-white text-base rounded-lg hover:bg-blue-600 transition-colors">
+               <Link href="/rental_form">Rent Now</Link> 
+              </button>
             </CardFooter>
           </Card>
         </div>

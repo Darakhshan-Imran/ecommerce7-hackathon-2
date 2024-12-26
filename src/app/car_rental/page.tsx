@@ -29,14 +29,15 @@ const options = [
 
 export default function TransactionPage() {
   return (
-    <main className=" bg-gray-100 py-8 flex">
-      <div className="flex w-2/3 gap-28 h-full">
-        <div className="w-1/3">
+    <main className=" bg-gray-100 py-8 flex gap-20 w-screen">
+       <div className="h-full">
           <Sidebar />
         </div>
-        <div className="w-3/5">
+      <div className="flex flex-col md:flex-row w-full h-full bg-blue-300 ">
+       
+      
           {/* Car on Rent with Map Location and details */}
-          <div className="w-full flex flex-col gap-10 justify-center items-start shadow-lg p-5 bg-white">
+          <div className="w-1/2 flex flex-col gap-10 justify-center items-start shadow-lg p-5 bg-white mt-12 rounded-xl">
             <h1 className="text-2xl font-semibold text-gray-950 py-4">
               Details Rental
             </h1>
@@ -88,10 +89,11 @@ export default function TransactionPage() {
             </div>
 
             {/* Pick and Drop options */}
-            <div className="flex flex-col justify-start">
+            {/* <div className="flex flex-col justify-start"> */}
+            <div>
               <SelectionComponent title="Pick &mdash; Up" options={options} />
-              <SelectionComponent title="Drop &mdash; Off" options={options} />
-            </div>
+              <SelectionComponent title="Drop &mdash; Off" options={options} /></div>
+            {/* </div> */}
 
             {/* Recent Transactions */}
             <div className="flex justify-between w-full">
@@ -106,24 +108,21 @@ export default function TransactionPage() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Transaction Summary */}
-
-      <div className="container mx-auto p-4 w-1/3 mt-10 flex flex-col gap-4">
+   
+        <div className="container mx-auto p-4 w-1/2 mt-10 flex flex-col gap-4">
         <div className="w-full flex flex-col px-3 bg-white">
+          
           <h1 className="text-2xl font-semibold text-gray-950">
             Top 5 Car Rental
           </h1>
-          <div className="flex">
+          <div className="flex items-center bg-gray-400 p-5 mt-4">
             <div className="w-1/2">
               <Component />
             </div>
             <div className="w-1/2 rounded-2xl">
               {/* Mapping */}
 
-              <div className="w-full md:w-1/2 flex flex-col gap-4">
+               <div className="w-full md:w-1/2 flex flex-col gap-4">
                 {carData.map((item, index) => (
                   <div
                     key={index}
@@ -144,13 +143,16 @@ export default function TransactionPage() {
                   </div>
                 ))}
               </div>
+            </div> 
             </div>
-          </div>
-        </div>
-        <div className="rounded-2xl">
+        </div> 
+         <div className="rounded-2xl">
           <RecentTransactions />
         </div>
+      </div> 
       </div>
+
+  
     </main>
   );
 }

@@ -84,7 +84,7 @@ export function VehicleFilterSidebar({
       {overlay}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 w-64 bg-white p-6 space-y-8 transform transition-transform duration-300 ease-in-out z-50 lg:relative lg:transform-none",
+          "fixed inset-y-0 left-0 w-[23rem] p-6 space-y-8 transform transition-transform duration-300 ease-in-out z-50 lg:relative lg:transform-none",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
           className
         )}

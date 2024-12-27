@@ -1,133 +1,116 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Slider } from "@/components/ui/slider";
-import { cn } from "@/lib/utils";
+import React, { useState } from 'react';
+import { Home, Car, BarChart, DollarSign, Inbox, Calendar, Settings, HelpCircle, Sun, Moon, LogOut, Menu } from 'lucide-react';
 
-interface FilterOption {
-  label: string;
-  count: number;
-  checked?: boolean;
-}
+const scrollbarStyles = `
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #f3f4f6;
+  }
 
-interface FilterSection {
-  title: string;
-  options: FilterOption[];
-}
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
 
-const vehicleTypes: FilterSection = {
-  title: "TYPE",
-  options: [
-    { label: "Sport", count: 10, checked: true },
-    { label: "SUV", count: 12, checked: true },
-    { label: "MPV", count: 16 },
-    { label: "Sedan", count: 20 },
-    { label: "Coupe", count: 14 },
-    { label: "Hatchback", count: 14 },
-  ],
-};
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 100%;
+  }
 
-const capacityOptions: FilterSection = {
-  title: "CAPACITY",
-  options: [
-    { label: "2 Person", count: 10, checked: true },
-    { label: "4 Person", count: 14 },
-    { label: "6 Person", count: 12 },
-    { label: "8 or More", count: 16, checked: true },
-  ],
-};
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #3b82f6;
+    border-radius: 3px;
+  }
+`;
 
-export function VehicleFilterSidebar({
-  className,
-  isOpen,
-  onClose,
-}: {
-  className?: string;
-  isOpen: boolean;
-  onClose: () => void;
-}) {
-  const [priceRange, setPriceRange] = React.useState([100]);
+const menuItems = [
+  { title: 'Dashboard', icon: <Home className="w-5 h-5" />, isActive: true },
+  { title: 'Car Rent', icon: <Car className="w-5 h-5" /> },
+  { title: 'Insight', icon: <BarChart className="w-5 h-5" /> },
+  { title: 'Reimburse', icon: <DollarSign className="w-5 h-5" /> },
+  { title: 'Inbox', icon: <Inbox className="w-5 h-5" /> },
+  { title: 'Calendar', icon: <Calendar className="w-5 h-5" /> },
+];
 
-  const FilterCheckbox = ({ option }: { option: FilterOption }) => (
-    <label className="flex items-center space-x-2 cursor-pointer">
-      <input
-        type="checkbox"
-        defaultChecked={option.checked}
-        className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-      />
-      <span className="text-gray-700">{option.label}</span>
-      <span className="text-gray-400 ml-1">({option.count})</span>
-    </label>
-  );
+const preferenceItems = [
+  { title: 'Settings', icon: <Settings className="w-5 h-5" /> },
+  { title: 'Help & Center', icon: <HelpCircle className="w-5 h-5" /> },
+  { title: 'Dark Mode', icon: <Sun className="w-5 h-5" />, isToggle: true },
+  { title: 'Log Out', icon: <LogOut className="w-5 h-5" /> },
+];
 
-  const FilterSection = ({ section }: { section: FilterSection }) => (
-    <div className="space-y-4">
-      <h3 className="text-sm text-gray-500 font-medium">{section.title}</h3>
-      <div className="space-y-3">
-        {section.options.map((option) => (
-          <FilterCheckbox key={option.label} option={option} />
-        ))}
-      </div>
-    </div>
-  );
+const Sidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Overlay for mobile
-  const overlay = isOpen && (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-      onClick={onClose}
-    />
-  );
+  const toggleSidebar = () => setIsOpen(!isOpen);
+  const toggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   return (
     <>
-      {overlay}
-      <aside
-        className={cn(
-          "fixed inset-y-0 left-0 w-[23rem] p-6 space-y-8 transform transition-transform duration-300 ease-in-out z-50 lg:relative lg:transform-none",
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
-          className
-        )}
+      {/* Mobile toggle button */}
+      <button
+        className="fixed top-4 left-4 z-[60] md:hidden bg-white p-2 rounded-md shadow-md"
+        onClick={toggleSidebar}
       >
-        <FilterSection section={vehicleTypes} />
-        <FilterSection section={capacityOptions} />
+        <Menu className="w-6 h-6 text-gray-600" />
+      </button>
 
-        <div className="space-y-4">
-          <h3 className="text-sm text-gray-500 font-medium">PRICE</h3>
-          <div className="space-y-6">
-            <Slider
-              defaultValue={[100]}
-              max={100}
-              step={1}
-              value={priceRange}
-              onValueChange={setPriceRange}
-              className="w-full"
-            />
-            <div className="text-gray-700">
-              Max. ${priceRange[0].toFixed(2)}
-            </div>
+      {/* Sidebar */}
+      <div
+        className={`fixed top-[7.8rem] left-0 h-[calc(100vh-7.8rem)] bg-white shadow-md flex flex-col transition-all duration-300 ease-in-out overflow-y-auto custom-scrollbar z-50
+                    ${isOpen ? 'w-auto translate-x-0' : 'w-0 -translate-x-full'} 
+                    md:translate-x-0 md:w-auto`}
+      >
+        <style>{scrollbarStyles}</style>
+        <div className="flex flex-col h-full min-w-[240px]">
+          {/* Main Menu */}
+          <div className="px-6 py-4">
+            <h2 className="text-xs font-medium text-gray-400 mb-4 tracking-wider">MAIN MENU</h2>
+            <ul className="space-y-1">
+              {menuItems.map((item, index) => (
+                <li 
+                  key={index} 
+                  className={`flex items-center text-[15px] font-medium gap-4 h-12 px-4 cursor-pointer transition-colors duration-200 rounded-xl
+                    ${item.isActive 
+                      ? 'bg-[#4318FF] text-white' 
+                      : 'text-[#76b6ee] hover:bg-blue-50'}`}
+                >
+                  {item.icon}
+                  <span className="font-normal">{item.title}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Preferences */}
+          <div className="px-6 py-4 mt-4">
+            <h2 className="text-xs font-medium text-gray-400 mb-4 tracking-wider">PREFERENCES</h2>
+            <ul className="space-y-1">
+              {preferenceItems.map((item, index) => (
+                <li 
+                  key={index} 
+                  className="flex items-center text-[15px] font-medium text-[#76b6ee] hover:bg-blue-50 rounded-xl gap-4 h-12 px-4 cursor-pointer transition-colors duration-200"
+                  onClick={item.isToggle ? toggleDarkMode : undefined}
+                >
+                  {item.isToggle ? (isDarkMode ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />) : item.icon}
+                  <span className="font-normal">{item.title}</span>
+                  {item.isToggle && (
+                    <div className="ml-auto">
+                      <div className={`w-12 h-6 rounded-full p-1 duration-300 ease-in-out cursor-pointer ${isDarkMode ? 'bg-[#4318FF]' : 'bg-gray-200'}`}>
+                        <div className={`bg-white w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out ${isDarkMode ? 'translate-x-6' : 'translate-x-0'}`} />
+                      </div>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-
-        {/* Close button - Only visible on mobile */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-gray-500 lg:hidden"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </aside>
-          
+      </div>
     </>
   );
-}
+};
+
+export default Sidebar;
+

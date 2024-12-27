@@ -1,5 +1,4 @@
-import { Transaction } from './transactionitems';
-import { TransactionItem } from './transactionitems';
+import { Transaction, TransactionItem } from './transactionitems'
 import carImage1 from "../../../public/cards/carImage1.png"
 import carImage2 from "../../../public/cards/carImage2.png"
 import carImage3 from "../../../public/cards/carImage3.png"
@@ -42,10 +41,10 @@ const transactions: Transaction[] = [
 
 export default function RecentTransactions() {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 sm:p-6 bg-white">
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl sm:text-2xl font-semibold">Recent Transaction</h2>
-        <a href="#" className="text-blue-500 text-sm hover:underline">
+    <div className="w-full mx-auto bg-white rounded-lg">
+      <div className="flex items-center justify-between mb-4 sm:mb-6 px-2 sm:px-4">
+        <h2 className="text-lg sm:text-xl font-semibold">Recent Transaction</h2>
+        <a href="#" className="text-blue-500 text-xs sm:text-sm hover:underline">
           View All
         </a>
       </div>
@@ -57,4 +56,3 @@ export default function RecentTransactions() {
     </div>
   )
 }
-

@@ -1,6 +1,5 @@
 'use client'
 
-import React, { useState } from "react";
 import { Heart } from 'lucide-react';
 import RatingStar from "../../components/ratingstar";
 import Image from "next/image";
@@ -150,8 +149,8 @@ const Detail = () => {
       </CardHeader>
       <CardContent>
         <p className="text-base lg:text-lg font-thin">
-          NISMO has become the embodiment of Nissan's outstanding performance,
-          inspired by the most unforgiving proving ground, the "race track".
+          NISMO has become the embodiment of Nissan&apos;s outstanding performance,
+          inspired by the most unforgiving proving ground, the &quote;race track.
         </p>
         <div className="flex flex-col sm:flex-row w-full mt-4">
           <div className="flex flex-col w-full sm:w-1/2 mb-2 sm:mb-0">

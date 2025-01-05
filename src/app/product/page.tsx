@@ -14,18 +14,6 @@ interface VehicleFilterSidebarProps {
   onClose: () => void;
 
 }
-
-
-interface LocationSelectorProps {
-
-  title: string;
-
-  options: { label: string; placeholder: string; }[];
-
-}
-
-
-
 const VehicleFilterSidebar: React.FC<VehicleFilterSidebarProps> = ({ isOpen, onClose }) => {
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>

@@ -66,22 +66,63 @@
 //     </div>
 //   );
 // }
+
+
 "use client";
 
+
+
+
 import { useState } from "react";
-import { VehicleFilterSidebar } from "../../components/sidebar";
+// import Sidebar from "../../components/sidebar";
 import SelectionComponent from "../../components/LandingPage/postnavbar";
 import React from "react";
 import { ArrowUpDown } from "lucide-react";
 import RecomendedCars from "@/components/LandingPage/recommended";
 
+
+interface VehicleFilterSidebarProps {
+
+  isOpen: boolean;
+
+  onClose: () => void;
+
+}
+
+
+interface LocationSelectorProps {
+
+  title: string;
+
+  options: { label: string; placeholder: string; }[];
+
+}
+
+
+
+const VehicleFilterSidebar: React.FC<VehicleFilterSidebarProps> = ({ isOpen, onClose }) => {
+  return (
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+      <button onClick={onClose}>Close</button>
+      {/* Add your sidebar content here */}
+    </div>
+  );
+}
+
+
 export default function Page() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const options = [
+  const pickupFields = [
     { label: "Locations", placeholder: "Select your city" },
     { label: "Date", placeholder: "Select your date" },
     { label: "Time", placeholder: "Select your time" },
-  ];
+  ]
+
+  const dropoffFields = [
+    { label: "Locations", placeholder: "Select your city" },
+    { label: "Date", placeholder: "Select your date" },
+    { label: "Time", placeholder: "Select your time" },
+  ]
 
   return (
     <div className="bg-gray-100 max-w-screen mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -119,13 +160,13 @@ export default function Page() {
 
           {/* Main content area */}
           <main className="flex-1">
-            <div className="flex flex-col sm:flex-row wrapper gap-3 sm:gap-6 items-center">
-              <SelectionComponent title="Pick &mdash; Up" options={options} />
-              <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-200">
-                <ArrowUpDown className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <SelectionComponent title="Drop &mdash; Off" options={options} />
-            </div>
+             <div className="flex flex-col sm:flex-row wrapper gap-4 sm:gap-6 lg:gap-12 items-center p-4">
+                    <SelectionComponent title="Pick &mdash; Up" fields={pickupFields} />
+                    <div className="flex items-center justify-center w-14 h-14 bg-blue-500 text-white rounded-xl shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-200">
+                      <ArrowUpDown className="w-6 h-6" />
+                    </div>
+                    <SelectionComponent title="Drop &mdash; Off" fields={dropoffFields} />
+                  </div>
             <div className="mt-6">
               <RecomendedCars />
             </div>

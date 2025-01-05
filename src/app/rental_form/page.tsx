@@ -20,7 +20,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="flex flex-col lg:flex-row w-full gap-2 p-4  wrapper bg-gray-50">
+    <div className="flex flex-col lg:flex-row w-full gap-2 p-4 bg-gray-50 mt-32">
       {/* Form Section */}
       <div className="max-w-4xl w-full lg:w-2/3 mx-auto p-6 bg-white shadow-md rounded-md">
         <h1 className="text-2xl font-semibold text-center mb-6">Car Rental Form</h1>

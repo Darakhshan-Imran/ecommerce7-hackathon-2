@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
-import { VehicleFilterSidebar } from "../../components/sidebar";
+import VehicleFilterSidebar from "../../components/sidebar";
 import { Heart } from 'lucide-react';
 import RatingStar from "../../components/ratingstar";
 import Image from "next/image";
@@ -63,6 +63,26 @@ const ReviewsData = [
 
 ];
 
+
+interface LocalVehicleFilterSidebarProps {
+
+  isOpen: boolean;
+
+  onClose: () => void;
+
+}
+
+
+
+const LocalVehicleFilterSidebar: React.FC<LocalVehicleFilterSidebarProps> = ({ isOpen, onClose }) => {
+  return (
+    <div>
+      {/* Sidebar content goes here */}
+    </div>
+  );
+}
+
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -76,7 +96,8 @@ const Detail = () => {
     <div className="bg-slate-100">
     <div className="wrapper flex flex-col lg:flex-row mt-11">
       {/* Left Sidebar */}
-      <VehicleFilterSidebar
+      
+      <LocalVehicleFilterSidebar
        isOpen={isSidebarOpen}
        onClose={() => setIsSidebarOpen(false)} />
 

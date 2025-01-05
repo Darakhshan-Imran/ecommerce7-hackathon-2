@@ -5,7 +5,7 @@ import SelectionComponent from "@/components/LandingPage/postnavbar";
 import React from "react";
 import { ArrowUpDown } from "lucide-react";
 import Cards from "@/components/cards";
-import LocationSelector from "@/components/LandingPage/postnavbar";
+
 
 export default function Home() {
   const pickupFields = [
@@ -21,7 +21,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="mb-10 bg-slate-100 flex justify-center items-center flex-col">
+    <div className=" bg-slate-100 flex justify-center items-center flex-col mt-32">
       {/* Wrapper for selection components */}
       <div className="flex flex-col sm:flex-row wrapper gap-4 sm:gap-6 lg:gap-12 items-center p-4">
         <SelectionComponent title="Pick &mdash; Up" fields={pickupFields} />

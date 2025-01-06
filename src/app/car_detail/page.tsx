@@ -123,9 +123,9 @@ const Detail = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-sm lg:text-base">
-                  NISMO has become the embodiment of Nissan's outstanding
+                  NISMO has become the embodiment of Nissan&apos;s outstanding
                   performance, inspired by the most unforgiving proving ground,
-                  the "race track."
+                  the &quot;race track.
                 </p>
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div>
@@ -168,7 +168,7 @@ const Detail = () => {
 
         {/* Review Section */}
         <div className="mt-10">
-          <h2 className="text-xl font-semibold">Reviews</h2>
+          <h2 className={`${plusJakartaSans.className}text-xl font-semibold`}>Reviews</h2>
           <div className="space-y-4">
             {ReviewsData.map((review, idx) => (
               <div
